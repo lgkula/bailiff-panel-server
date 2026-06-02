@@ -1,0 +1,18 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Keep Authorization header available in PHP.
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Route all non-existing files/directories through Slim front controller.
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [QSA,L]
+</IfModule>
+
+DirectoryIndex index.php
+
+# Do not allow direct access to hidden files (.env, .git, etc.).
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>

@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   description: Simple REST API for testing a bailiff form and error handling.
 servers:
-  - url: http://localhost:8080
+  - url: /
 paths:
   /api/bailiffs:
     get:
@@ -16,12 +16,12 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: Bailiff list
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BailiffListResponse"
+                $ref: '#/components/schemas/BailiffListResponse'
     post:
       summary: Create a bailiff
       requestBody:
@@ -29,67 +29,97 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/BailiffInput"
+              $ref: '#/components/schemas/BailiffInput'
       responses:
-        "201":
+        '201':
           description: Created bailiff
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BailiffResponse"
-        "400":
-          $ref: "#/components/responses/InvalidJson"
-        "422":
-          $ref: "#/components/responses/ValidationError"
+                $ref: '#/components/schemas/BailiffResponse'
+        '400':
+          $ref: '#/components/responses/InvalidJson'
+        '422':
+          $ref: '#/components/responses/ValidationError'
   /api/bailiffs/{id}:
     get:
       summary: Get a bailiff
       parameters:
-        - $ref: "#/components/parameters/BailiffId"
+        - $ref: '#/components/parameters/BailiffId'
       responses:
-        "200":
+        '200':
           description: Bailiff details
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BailiffResponse"
-        "404":
-          $ref: "#/components/responses/BailiffNotFound"
+                $ref: '#/components/schemas/BailiffResponse'
+        '404':
+          $ref: '#/components/responses/BailiffNotFound'
     put:
       summary: Update a bailiff
       parameters:
-        - $ref: "#/components/parameters/BailiffId"
+        - $ref: '#/components/parameters/BailiffId'
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/BailiffInput"
+              $ref: '#/components/schemas/BailiffInput'
       responses:
-        "200":
+        '200':
           description: Updated bailiff
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BailiffResponse"
-        "400":
-          $ref: "#/components/responses/InvalidJson"
-        "404":
-          $ref: "#/components/responses/BailiffNotFound"
-        "422":
-          $ref: "#/components/responses/ValidationError"
-  /api/random-error:
-    get:
-      summary: Randomly return success, client error, server error, or timeout-like delay
+                $ref: '#/components/schemas/BailiffResponse'
+        '400':
+          $ref: '#/components/responses/InvalidJson'
+        '404':
+          $ref: '#/components/responses/BailiffNotFound'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /api/pull-public-data:
+    post:
+      summary: Pull public data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PullPublicDataRequest'
+            example:
+              dateFrom: '2026-01-01'
+              dateTo: '2026-01-31'
       responses:
-        "200":
-          description: Random success
-        "400":
-          description: Intentional random bad request
-        "500":
-          description: Intentional random failure
-        "504":
-          description: Intentional timeout-like response
+        '205':
+          description: Unexpected result, retry is suggested
+          headers:
+            X-Public-Data-Message:
+              description: URL-encoded response message; useful because HTTP 205 responses may be treated as bodyless by clients.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PullPublicDataResponse'
+              example:
+                message: Próba pobierania danych zakończyła sie nieoczekiwanym wynikiem, ponów próbę.
+        '400':
+          $ref: '#/components/responses/PullPublicDataError'
+        '401':
+          $ref: '#/components/responses/PullPublicDataError'
+        '403':
+          $ref: '#/components/responses/PullPublicDataError'
+        '404':
+          $ref: '#/components/responses/PullPublicDataError'
+        '429':
+          $ref: '#/components/responses/PullPublicDataError'
+        '500':
+          $ref: '#/components/responses/PullPublicDataError'
+        '502':
+          $ref: '#/components/responses/PullPublicDataError'
+        '503':
+          $ref: '#/components/responses/PullPublicDataError'
 components:
   parameters:
     BailiffId:
@@ -170,18 +200,40 @@ components:
             - active
             - suspended
             - inactive
+    PullPublicDataRequest:
+      type: object
+      required:
+        - dateFrom
+        - dateTo
+      properties:
+        dateFrom:
+          type: string
+          format: date
+          example: '2026-01-01'
+        dateTo:
+          type: string
+          format: date
+          example: '2026-01-31'
+    PullPublicDataResponse:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          example: Próba pobierania danych zakończyła sie błędem.
     BailiffResponse:
       type: object
       properties:
         data:
-          $ref: "#/components/schemas/Bailiff"
+          $ref: '#/components/schemas/Bailiff'
     BailiffListResponse:
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: "#/components/schemas/Bailiff"
+            $ref: '#/components/schemas/Bailiff'
         meta:
           type: object
           properties:
@@ -210,16 +262,29 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorResponse"
+            $ref: '#/components/schemas/ErrorResponse'
     ValidationError:
       description: Validation error
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorResponse"
+            $ref: '#/components/schemas/ErrorResponse'
     BailiffNotFound:
       description: Bailiff not found
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ErrorResponse"
+            $ref: '#/components/schemas/ErrorResponse'
+    PullPublicDataError:
+      description: Public data pull failed
+      headers:
+        X-Public-Data-Message:
+          description: URL-encoded response message.
+          schema:
+            type: string
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PullPublicDataResponse'
+          example:
+            message: Próba pobierania danych zakończyła sie błędem.

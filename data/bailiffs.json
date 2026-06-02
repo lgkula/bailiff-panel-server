@@ -6,7 +6,7 @@
         "courtName": "Sąd Rejonowy dla Warszawy-Mokotowa",
         "officeAddress": "ul. Puławska 10, 02-566 Warszawa",
         "email": "jan.kowalski@example.pl",
-        "phone": "+48 501 234 568",
+        "phone": "+48 501 234 567",
         "status": "active"
     },
     {
@@ -21,12 +21,212 @@
     },
     {
         "id": "bailiff-003",
-        "firstName": "Piotr",
-        "lastName": "Wiśniewski",
+        "firstName": "Jan",
+        "lastName": "Czarny",
         "courtName": "Sąd Rejonowy w Poznaniu",
-        "officeAddress": "ul. Młyńska 1a, 61-729 Poznań",
-        "email": "piotr.wisniewski@example.pl",
-        "phone": "+48 602 333 444",
+        "officeAddress": "ul. Młyńska 7a, 61-729 Poznań",
+        "email": "jan.czarny@example.pl",
+        "phone": "600123123",
+        "status": "suspended"
+    },
+    {
+        "id": "bailiff-004",
+        "firstName": "Andrzej",
+        "lastName": "Nowak",
+        "courtName": "Sąd Rejonowy we Wrocławiu",
+        "officeAddress": "ul. Legnicka 45, 54-203 Wrocław",
+        "email": "andrzej.nowak@example.pl",
+        "phone": "+48 603 123 456",
+        "status": "active"
+    },
+    {
+        "id": "bailiff-005",
+        "firstName": "Katarzyna",
+        "lastName": "Mazur",
+        "courtName": "Sąd Rejonowy w Krakowie",
+        "officeAddress": "ul. Karmelicka 12, 31-128 Kraków",
+        "email": "katarzyna.mazur@example.pl",
+        "phone": "+48 604 234 567",
+        "status": "active"
+    },
+    {
+        "id": "bailiff-006",
+        "firstName": "Tomasz",
+        "lastName": "Kaczmarek",
+        "courtName": "Sąd Rejonowy w Łodzi",
+        "officeAddress": "ul. Piotrkowska 88, 90-103 Łódź",
+        "email": "tomasz.kaczmarek@example.pl",
+        "phone": "+48 605 345 678",
+        "status": "inactive"
+    },
+    {
+        "id": "bailiff-007",
+        "firstName": "Monika",
+        "lastName": "Lewandowska",
+        "courtName": "Sąd Rejonowy we Wrocławiu",
+        "officeAddress": "ul. Wojska Polskiego 22, 70-473 Wrocław",
+        "email": "monika.lewandowska@example.pl",
+        "phone": "+48 606 456 789",
+        "status": "active"
+    },
+    {
+        "id": "bailiff-008",
+        "firstName": "Paweł",
+        "lastName": "Wójcik",
+        "courtName": "Sąd Rejonowy w Lublinie",
+        "officeAddress": "ul. Narutowicza 14, 20-004 Lublin",
+        "email": "pawel.wojcik@example.pl",
+        "phone": "+48 607 567 890",
+        "status": "suspended"
+    },
+    {
+        "id": "bailiff-009",
+        "firstName": "Anna",
+        "lastName": "Kamińska",
+        "courtName": "Sąd Rejonowy w Białymstoku",
+        "officeAddress": "ul. Mickiewicza 5, 15-213 Białystok",
+        "email": "anna.kaminska@example.pl",
+        "phone": "+48 608 111 222",
+        "status": "active"
+    },
+    {
+        "id": "bailiff-010",
+        "firstName": "Marek",
+        "lastName": "Dąbrowski",
+        "courtName": "Sąd Rejonowy w Opolu",
+        "officeAddress": "ul. Ozimska 30, 45-057 Opole",
+        "email": "marek.dabrowski@example.pl",
+        "phone": "+48 609 222 333",
+        "status": "inactive"
+    },
+    {
+        "id": "bailiff-011",
+        "firstName": "Ewa",
+        "lastName": "Szymańska",
+        "courtName": "Sąd Rejonowy w Katowicach",
+        "officeAddress": "ul. Andrzeja 16, 40-061 Katowice",
+        "email": "ewa.szymanska@example.pl",
+        "phone": "+48 610 333 444",
+        "status": "active"
+    },
+    {
+        "id": "bailiff-012",
+        "firstName": "Rafał",
+        "lastName": "Woźniak",
+        "courtName": "Sąd Rejonowy we Wrocławiu",
+        "officeAddress": "ul. Grunwaldzka 9, 35-068 Wrocław",
+        "email": "rafal.wozniak@example.pl",
+        "phone": "+48 611 444 555",
+        "status": "active"
+    },
+    {
+        "id": "bailiff-013",
+        "firstName": "Joanna",
+        "lastName": "Krawczyk",
+        "courtName": "Sąd Rejonowy w Kielcach",
+        "officeAddress": "ul. Seminaryjska 18, 25-372 Kielce",
+        "email": "joanna.krawczyk@example.pl",
+        "phone": "+48 612 555 666",
+        "status": "suspended"
+    },
+    {
+        "id": "bailiff-014",
+        "firstName": "Grzegorz",
+        "lastName": "Pawlak",
+        "courtName": "Sąd Rejonowy w Toruniu",
+        "officeAddress": "ul. Fosa Staromiejska 12, 87-100 Toruń",
+        "email": "grzegorz.pawlak@example.pl",
+        "phone": "+48 613 666 777",
+        "status": "active"
+    },
+    {
+        "id": "bailiff-015",
+        "firstName": "Agnieszka",
+        "lastName": "Michalska",
+        "courtName": "Sąd Rejonowy w Olsztynie",
+        "officeAddress": "ul. Dąbrowszczaków 44, 10-540 Olsztyn",
+        "email": "agnieszka.michalska@example.pl",
+        "phone": "+48 614 777 888",
+        "status": "inactive"
+    },
+    {
+        "id": "bailiff-016",
+        "firstName": "Łukasz",
+        "lastName": "Król",
+        "courtName": "Sąd Rejonowy we Wrocławiu",
+        "officeAddress": "ul. Kupiecka 25, 65-058 Wrocław",
+        "email": "lukasz.krol@example.pl",
+        "phone": "+48 615 888 999",
+        "status": "active"
+    },
+    {
+        "id": "bailiff-017",
+        "firstName": "Dorota",
+        "lastName": "Wieczorek",
+        "courtName": "Sąd Rejonowy w Opolu",
+        "officeAddress": "ul. Zwycięstwa 101, 75-011 Opole",
+        "email": "dorota.wieczorek@example.pl",
+        "phone": "+48 616 123 789",
+        "status": "active"
+    },
+    {
+        "id": "bailiff-018",
+        "firstName": "Sebastian",
+        "lastName": "Jankowski",
+        "courtName": "Sąd Rejonowy w Opolu",
+        "officeAddress": "ul. Zwycięstwa 101, 75-011 Opole",
+        "email": "sebastian.jankowski@example.pl",
+        "phone": "+48 617 234 890",
+        "status": "suspended"
+    },
+    {
+        "id": "bailiff-019",
+        "firstName": "Magdalena",
+        "lastName": "Adamczyk",
+        "courtName": "Sąd Rejonowy w Częstochowie",
+        "officeAddress": "ul. Dąbrowskiego 23, 42-202 Częstochowa",
+        "email": "magdalena.adamczyk@example.pl",
+        "phone": "+48 618 345 901",
+        "status": "active"
+    },
+    {
+        "id": "bailiff-020",
+        "firstName": "Damian",
+        "lastName": "Lis",
+        "courtName": "Sąd Rejonowy w Gdyni",
+        "officeAddress": "ul. Świętojańska 78, 81-388 Gdynia",
+        "email": "damian.lis@example.pl",
+        "phone": "+48 619 456 012",
+        "status": "inactive"
+    },
+    {
+        "id": "bailiff-021",
+        "firstName": "Paulina",
+        "lastName": "Baran",
+        "courtName": "Sąd Rejonowy w Elblągu",
+        "officeAddress": "ul. 1 Maja 15, 82-300 Elbląg",
+        "email": "paulina.baran@example.pl",
+        "phone": "+48 620 567 123",
+        "status": "active"
+    },
+    {
+        "id": "bailiff-022",
+        "firstName": "Karol",
+        "lastName": "Zając",
+        "courtName": "Sąd Rejonowy w Płocku",
+        "officeAddress": "ul. Kolegialna 20, 09-402 Płock",
+        "email": "karol.zajac@example.pl",
+        "phone": "+48 621 678 234",
+        "status": "active"
+    },
+    {
+        "id": "bailiff-023",
+        "firstName": "Natalia",
+        "lastName": "Górska",
+        "courtName": "Sąd Rejonowy w Legnicy",
+        "officeAddress": "ul. Złotoryjska 14, 59-220 Legnica",
+        "email": "natalia.gorska@example.pl",
+        "phone": "+48 622 789 345",
         "status": "suspended"
     }
 ]

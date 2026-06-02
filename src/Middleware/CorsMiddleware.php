@@ -12,9 +12,10 @@ use Slim\Psr7\Response as SlimResponse;
 
 final class CorsMiddleware implements MiddlewareInterface
 {
-    private const ALLOWED_ORIGINS = [
+    private const DEFAULT_ALLOWED_ORIGINS = [
         'http://localhost:5173',
         'http://127.0.0.1:5173',
+        'https://komornik.kula.wroclaw.pl',
     ];
 
     public function process(Request $request, RequestHandlerInterface $handler): Response
@@ -25,13 +26,30 @@ final class CorsMiddleware implements MiddlewareInterface
             $response = $handler->handle($request);
         }
 
+        $allowedOrigins = $this->allowedOrigins();
         $origin = $request->getHeaderLine('Origin');
-        $allowedOrigin = in_array($origin, self::ALLOWED_ORIGINS, true) ? $origin : self::ALLOWED_ORIGINS[0];
+        $allowedOrigin = in_array($origin, $allowedOrigins, true) ? $origin : $allowedOrigins[0];
 
         return $response
             ->withHeader('Access-Control-Allow-Origin', $allowedOrigin)
             ->withHeader('Access-Control-Allow-Headers', 'Content-Type, Accept')
             ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, OPTIONS')
             ->withHeader('Access-Control-Max-Age', '86400');
+    }
+
+    private function allowedOrigins(): array
+    {
+        $configuredOrigins = getenv('ALLOWED_ORIGINS');
+
+        if ($configuredOrigins === false || trim($configuredOrigins) === '') {
+            return self::DEFAULT_ALLOWED_ORIGINS;
+        }
+
+        $origins = array_values(array_filter(
+            array_map('trim', explode(',', $configuredOrigins)),
+            static fn (string $origin): bool => $origin !== '',
+        ));
+
+        return $origins === [] ? self::DEFAULT_ALLOWED_ORIGINS : $origins;
     }
 }

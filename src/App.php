@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace BailiffPanel;
 
 use BailiffPanel\Controllers\BailiffController;
-use BailiffPanel\Controllers\RandomErrorController;
+use BailiffPanel\Controllers\DocsController;
+use BailiffPanel\Controllers\PublicDataController;
 use BailiffPanel\Middleware\CorsMiddleware;
 use BailiffPanel\Middleware\JsonBodyParserMiddleware;
 use BailiffPanel\Services\BailiffRepository;
@@ -33,13 +34,15 @@ final class App
         $validator = new BailiffValidator();
 
         $bailiffs = new BailiffController($repository, $validator, $responses);
-        $randomError = new RandomErrorController($responses);
+        $docs = new DocsController();
+        $publicData = new PublicDataController($responses);
 
         $app->get('/api/bailiffs', [$bailiffs, 'index']);
         $app->get('/api/bailiffs/{id}', [$bailiffs, 'show']);
         $app->post('/api/bailiffs', [$bailiffs, 'create']);
         $app->put('/api/bailiffs/{id}', [$bailiffs, 'update']);
-        $app->get('/api/random-error', [$randomError, 'show']);
+        $app->post('/api/pull-public-data', [$publicData, 'pull']);
+        $app->get('/api/docs', [$docs, 'swagger']);
         $app->get('/docs/openapi.yaml', static function (Request $request, Response $response) use ($rootPath): Response {
             $openApi = file_get_contents($rootPath . '/docs/openapi.yaml');
             $response->getBody()->write($openApi === false ? '' : $openApi);
@@ -51,7 +54,8 @@ final class App
             return (new ResponseFactory())->json($response, [
                 'data' => [
                     'name' => 'Bailiff Panel API',
-                    'docs' => '/docs/openapi.yaml',
+                    'docs' => '/api/docs',
+                    'openApi' => '/docs/openapi.yaml',
                 ],
             ]);
         });

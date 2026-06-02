@@ -1,0 +1,225 @@
+openapi: 3.0.3
+info:
+  title: Bailiff Panel API
+  version: 1.0.0
+  description: Simple REST API for testing a bailiff form and error handling.
+servers:
+  - url: http://localhost:8080
+paths:
+  /api/bailiffs:
+    get:
+      summary: List bailiffs
+      parameters:
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Bailiff list
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BailiffListResponse"
+    post:
+      summary: Create a bailiff
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BailiffInput"
+      responses:
+        "201":
+          description: Created bailiff
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BailiffResponse"
+        "400":
+          $ref: "#/components/responses/InvalidJson"
+        "422":
+          $ref: "#/components/responses/ValidationError"
+  /api/bailiffs/{id}:
+    get:
+      summary: Get a bailiff
+      parameters:
+        - $ref: "#/components/parameters/BailiffId"
+      responses:
+        "200":
+          description: Bailiff details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BailiffResponse"
+        "404":
+          $ref: "#/components/responses/BailiffNotFound"
+    put:
+      summary: Update a bailiff
+      parameters:
+        - $ref: "#/components/parameters/BailiffId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BailiffInput"
+      responses:
+        "200":
+          description: Updated bailiff
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BailiffResponse"
+        "400":
+          $ref: "#/components/responses/InvalidJson"
+        "404":
+          $ref: "#/components/responses/BailiffNotFound"
+        "422":
+          $ref: "#/components/responses/ValidationError"
+  /api/random-error:
+    get:
+      summary: Randomly return success, client error, server error, or timeout-like delay
+      responses:
+        "200":
+          description: Random success
+        "400":
+          description: Intentional random bad request
+        "500":
+          description: Intentional random failure
+        "504":
+          description: Intentional timeout-like response
+components:
+  parameters:
+    BailiffId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        example: bailiff-001
+  schemas:
+    Bailiff:
+      type: object
+      required:
+        - id
+        - firstName
+        - lastName
+        - courtName
+        - officeAddress
+        - email
+        - phone
+        - status
+      properties:
+        id:
+          type: string
+          example: bailiff-001
+        firstName:
+          type: string
+          example: Jan
+        lastName:
+          type: string
+          example: Kowalski
+        courtName:
+          type: string
+          example: Sąd Rejonowy dla Warszawy-Mokotowa
+        officeAddress:
+          type: string
+          example: ul. Puławska 10, 02-566 Warszawa
+        email:
+          type: string
+          format: email
+          example: jan.kowalski@example.pl
+        phone:
+          type: string
+          example: +48 501 234 567
+        status:
+          type: string
+          enum:
+            - active
+            - suspended
+            - inactive
+    BailiffInput:
+      type: object
+      required:
+        - firstName
+        - lastName
+        - courtName
+        - officeAddress
+        - email
+        - phone
+        - status
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        courtName:
+          type: string
+        officeAddress:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        status:
+          type: string
+          enum:
+            - active
+            - suspended
+            - inactive
+    BailiffResponse:
+      type: object
+      properties:
+        data:
+          $ref: "#/components/schemas/Bailiff"
+    BailiffListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Bailiff"
+        meta:
+          type: object
+          properties:
+            count:
+              type: integer
+            search:
+              type: string
+              nullable: true
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            fields:
+              type: object
+              additionalProperties:
+                type: string
+  responses:
+    InvalidJson:
+      description: Invalid JSON request body
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    ValidationError:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    BailiffNotFound:
+      description: Bailiff not found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"

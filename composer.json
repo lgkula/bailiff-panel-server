@@ -1,0 +1,26 @@
+{
+  "name": "rekrutacja/bailiff-panel-server",
+  "description": "Simple REST API for a QA recruitment exercise.",
+  "type": "project",
+  "license": "MIT",
+  "require": {
+    "php": ">=8.2",
+    "slim/slim": "^4.14",
+    "slim/psr7": "^1.7"
+  },
+  "autoload": {
+    "psr-4": {
+      "BailiffPanel\\": "src/"
+    }
+  },
+  "scripts": {
+    "start": "php -S localhost:8080 -t public",
+    "test": [
+      "php tests/BailiffValidatorTest.php",
+      "php tests/BailiffRepositoryTest.php"
+    ]
+  },
+  "config": {
+    "sort-packages": true
+  }
+}

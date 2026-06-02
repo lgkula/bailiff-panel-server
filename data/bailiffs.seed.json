@@ -1,0 +1,32 @@
+[
+  {
+    "id": "bailiff-001",
+    "firstName": "Jan",
+    "lastName": "Kowalski",
+    "courtName": "Sąd Rejonowy dla Warszawy-Mokotowa",
+    "officeAddress": "ul. Puławska 10, 02-566 Warszawa",
+    "email": "jan.kowalski@example.pl",
+    "phone": "+48 501 234 567",
+    "status": "active"
+  },
+  {
+    "id": "bailiff-002",
+    "firstName": "Maria",
+    "lastName": "Zielińska",
+    "courtName": "Sąd Rejonowy w Gdańsku",
+    "officeAddress": "ul. Nowe Ogrody 30, 80-803 Gdańsk",
+    "email": "maria.zielinska@example.pl",
+    "phone": "+48 601 111 222",
+    "status": "inactive"
+  },
+  {
+    "id": "bailiff-003",
+    "firstName": "Piotr",
+    "lastName": "Wiśniewski",
+    "courtName": "Sąd Rejonowy w Poznaniu",
+    "officeAddress": "ul. Młyńska 1a, 61-729 Poznań",
+    "email": "piotr.wisniewski@example.pl",
+    "phone": "+48 602 333 444",
+    "status": "suspended"
+  }
+]
